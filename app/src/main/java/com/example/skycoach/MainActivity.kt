@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.skycoach.ui.navigation.Screen
+import com.example.skycoach.ui.screens.GeneratingScreen
 import com.example.skycoach.ui.screens.OnboardingScreen
 import com.example.skycoach.ui.screens.WelcomeScreen
 import com.example.skycoach.ui.theme.SkyCoachTheme
@@ -58,7 +59,9 @@ fun SkyCoachAppNavigation() {
             }
         }
         composable(Screen.Generating.route) {
-            // Screen to be implemented
+            GeneratingScreen {
+                navController.navigate(Screen.Learning.route)
+            }
         }
         composable(Screen.Learning.route) {
             // Screen to be implemented
