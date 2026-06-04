@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.skycoach.ui.navigation.Screen
+import com.example.skycoach.ui.screens.OnboardingScreen
 import com.example.skycoach.ui.screens.WelcomeScreen
 import com.example.skycoach.ui.theme.SkyCoachTheme
 
@@ -53,7 +53,9 @@ fun SkyCoachAppNavigation() {
             }
         }
         composable(Screen.Onboarding.route) {
-            // Screen to be implemented
+            OnboardingScreen {
+                navController.navigate(Screen.Generating.route)
+            }
         }
         composable(Screen.Generating.route) {
             // Screen to be implemented

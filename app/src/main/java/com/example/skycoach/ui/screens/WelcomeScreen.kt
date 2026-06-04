@@ -53,6 +53,7 @@ import com.example.skycoach.data.AllDestinations
 import com.example.skycoach.data.DestMadrid
 import com.example.skycoach.ui.components.FlightRouteWidget
 import com.example.skycoach.ui.components.GlassCard
+import com.example.skycoach.ui.components.TimeToDestination
 
 @Composable
 fun WelcomeScreen(
@@ -295,60 +296,7 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.width(100.dp))
 
             // RIGHT SIDE: AMBIENT FLIGHT INFO
-            Column(
-                modifier = Modifier.weight(0.8f),
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.spacedBy(48.dp)
-            ) {
-                // Route Display (More minimalist, technical)
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        text = "FLIGHT ROUTE",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        letterSpacing = 3.sp
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    FlightRouteWidget(
-                        to = selectedDest.code,
-                        modifier = Modifier.scale(1.1f)
-                    )
-                }
-                
-                // Time Display
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        text = "TIME TO ARRIVAL",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        letterSpacing = 3.sp
-                    )
-                    Text(
-                        text = "10h 45m",
-                        style = MaterialTheme.typography.displayMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        fontWeight = FontWeight.Light
-                    )
-                }
-                
-                // Decorative Element (IFE Seat Info)
-                Surface(
-                    color = Color.Black.copy(alpha = 0.5f),
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "SEAT 12A  |  SKYCOACH PRO",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f),
-                            letterSpacing = 2.sp
-                        )
-                    }
-                }
-            }
+            TimeToDestination(modifier = Modifier.weight(0.8f))
         }
     }
 }
