@@ -94,21 +94,8 @@ fun GeneratingScreen(
                     .fillMaxSize()
                     .background(
                         Brush.horizontalGradient(
-                            0.3f to Color(0xFF0A192F),
+                            0.3f to MaterialTheme.colorScheme.background,
                             0.7f to Color.Transparent
-                        )
-                    )
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.radialGradient(
-                            colors = listOf(
-                                DestMadrid.mainColor.copy(alpha = 0.1f),
-                                Color.Transparent
-                            ),
-                            radius = 2500f
                         )
                     )
             )
@@ -219,7 +206,7 @@ fun GeneratingScreen(
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = "AI Personalization in progress...",
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                     letterSpacing = 2.sp
                 )
