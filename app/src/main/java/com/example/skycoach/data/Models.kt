@@ -74,3 +74,52 @@ val MadridDeck = listOf(
     Flashcard(id = 6, target = "Mucho gusto", phonetic = "moo-choh goos-toh", translation = "Pleasure to meet you", example = "When meeting a business partner: Mucho gusto.", highlightedWord = "Mucho gusto"),
     Flashcard(id = 7, target = "¿Podemos empezar?", phonetic = "poh-deh-mohs ehm-peh-thar", translation = "Can we start?", example = "At the beginning of a meeting: ¿Podemos empezar?", highlightedWord = "¿Podemos empezar?")
 )
+
+enum class QuestionType { TRANSLATION, CONTEXT, PRONUNCIATION }
+
+data class QuizQuestion(
+    val id: Int,
+    val question: String,
+    val options: List<String>,        // For PRONUNCIATION: these are audio clip labels e.g. "Audio A"
+    val correctAnswer: String,
+    val type: QuestionType = QuestionType.TRANSLATION,
+    // Only used for PRONUNCIATION questions — maps option label → audio URL
+    val audioOptions: Map<String, String> = emptyMap()
+)
+
+val MadridQuiz = listOf(
+    QuizQuestion(
+        id = 1,
+        type = QuestionType.TRANSLATION,
+        question = "What does 'La cuenta' mean?",
+        options = listOf("The bill", "The menu", "The table", "The order"),
+        correctAnswer = "The bill"
+    ),
+    QuizQuestion(
+        id = 2,
+        type = QuestionType.CONTEXT,
+        question = "How do you ask for a table for two?",
+        options = listOf("Dos personas", "Una mesa para dos", "La cuenta, por favor", "Hola amigos"),
+        correctAnswer = "Una mesa para dos"
+    ),
+    QuizQuestion(
+        id = 3,
+        type = QuestionType.TRANSLATION,
+        question = "What does 'Mucho gusto' mean?",
+        options = listOf("See you soon", "Where is the library?", "Pleasure to meet you", "I am hungry"),
+        correctAnswer = "Pleasure to meet you"
+    ),
+    QuizQuestion(
+        id = 5,
+        type = QuestionType.PRONUNCIATION,
+        question = "How do you pronounce 'La cuenta, por favor'?",
+        options = listOf("Audio A", "Audio B", "Audio C", "Audio D"),
+        correctAnswer = "Audio A",
+        audioOptions = mapOf(
+            "Audio A" to "url_correct_pronunciation",
+            "Audio B" to "url_wrong_1",
+            "Audio C" to "url_wrong_2",
+            "Audio D" to "url_wrong_3"
+        )
+    )
+)

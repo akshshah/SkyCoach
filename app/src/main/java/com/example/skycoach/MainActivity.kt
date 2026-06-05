@@ -17,6 +17,7 @@ import com.example.skycoach.ui.navigation.Screen
 import com.example.skycoach.ui.screens.GeneratingScreen
 import com.example.skycoach.ui.screens.LearningScreen
 import com.example.skycoach.ui.screens.OnboardingScreen
+import com.example.skycoach.ui.screens.QuizScreen
 import com.example.skycoach.ui.screens.WelcomeScreen
 import com.example.skycoach.ui.theme.SkyCoachTheme
 
@@ -70,7 +71,10 @@ fun SkyCoachAppNavigation() {
             }
         }
         composable(Screen.Quiz.route) {
-            // Screen to be implemented
+            QuizScreen(
+                onNextLevel = { },
+                onRetry = {navController.navigate(Screen.Quiz.route) }
+            )
         }
         composable(Screen.LandingKit.route) {
             // Screen to be implemented

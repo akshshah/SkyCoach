@@ -94,8 +94,7 @@ fun FlashcardWidget(
 
     Box(
         modifier = modifier
-            .fillMaxWidth(0.6f)
-            .aspectRatio(1.5f)
+            .fillMaxWidth(0.45f)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
@@ -172,7 +171,8 @@ fun CardFront(flashcard: Flashcard) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = flashcard.phonetic,
-                    style = MaterialTheme.typography.titleLarge.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.Medium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                         letterSpacing = 1.sp
@@ -190,7 +190,7 @@ fun CardFront(flashcard: Flashcard) {
             )
             Text(
                 text = "Tap to reveal",
-                style = MaterialTheme.typography.titleLarge.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     letterSpacing = 2.sp,
                     color = MaterialTheme.colorScheme.primary.copy(alpha = hintAlpha),
                     fontWeight = FontWeight.SemiBold
@@ -248,7 +248,8 @@ fun CardBack(flashcard: Flashcard) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = flashcard.phonetic,
-                    style = MaterialTheme.typography.titleLarge.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.Medium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
                         letterSpacing = 1.sp

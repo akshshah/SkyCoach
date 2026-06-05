@@ -122,12 +122,12 @@ fun OnboardingScreen(
                         // Progress Indicator
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
                             repeat(totalSteps) { step ->
                                 Box(
                                     modifier = Modifier
-                                        .height(4.dp)
+                                        .height(8.dp)
                                         .weight(1f)
                                         .clip(CircleShape)
                                         .background(
@@ -138,7 +138,7 @@ fun OnboardingScreen(
                             }
                         }
                         
-                        Spacer(modifier = Modifier.height(40.dp))
+                        Spacer(modifier = Modifier.height(28.dp))
 
                         // Question Title
                         AnimatedContent(
@@ -169,10 +169,10 @@ fun OnboardingScreen(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(48.dp))
+                        Spacer(modifier = Modifier.height(28.dp))
 
                         // Selection Area
-                        Box(modifier = Modifier.height(440.dp)) {
+                        Box(modifier = Modifier.height(480.dp)) {
                             AnimatedContent(
                                 targetState = currentStep,
                                 transitionSpec = {
@@ -188,7 +188,7 @@ fun OnboardingScreen(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.height(12.dp))
 
                         // Action Button
                         Button(
@@ -200,9 +200,9 @@ fun OnboardingScreen(
                                 }
                             },
                             modifier = Modifier
-                                .height(72.dp)
+                                .height(64.dp)
                                 .align(Alignment.End)
-                                .width(240.dp),
+                                .width(200.dp),
                             enabled = when(currentStep) {
                                 1 -> selectedLevel.isNotEmpty()
                                 2 -> selectedPurpose.isNotEmpty()
@@ -218,10 +218,10 @@ fun OnboardingScreen(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
                                     text = if (currentStep == totalSteps) "FINISH" else "NEXT",
-                                    style = MaterialTheme.typography.labelLarge.copy(
-                                        fontWeight = FontWeight.ExtraBold,
-                                        letterSpacing = 2.sp
-                                    )
+                                    style = MaterialTheme.typography.bodyLarge.copy(
+                                        letterSpacing = 1.sp
+                                    ),
+                                    fontWeight = FontWeight.Bold
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)

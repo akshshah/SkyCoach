@@ -206,7 +206,7 @@ fun GeneratingScreen(
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = "AI Personalization in progress...",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                     letterSpacing = 2.sp
                 )

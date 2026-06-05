@@ -1,6 +1,5 @@
 package com.example.skycoach.ui.screens
 
-import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
@@ -21,9 +20,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -51,6 +48,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.filled.Headphones
 import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -83,7 +81,7 @@ import androidx.compose.ui.unit.sp
 import com.example.skycoach.data.Flashcard
 import com.example.skycoach.data.FlashcardType
 import com.example.skycoach.data.MadridDeck
-import com.example.skycoach.ui.components.ConfettiOverlay
+import com.example.skycoach.ui.components.ConfettiCanvasOverlay
 import com.example.skycoach.ui.components.FlashcardWidget
 import com.example.skycoach.ui.components.GlassCard
 import kotlinx.coroutines.delay
@@ -159,7 +157,7 @@ fun LearningScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             // ── Card area ──
-            Box(modifier = Modifier.weight(6f), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.weight(4f), contentAlignment = Alignment.Center) {
                 AnimatedContent(
                     targetState = currentIndex,
                     transitionSpec = {
@@ -252,14 +250,31 @@ fun LearningScreen(
 
         // ── Confetti / completion overlay ──
         if (showConfetti) {
-            ConfettiOverlay(
-                level = levelName,
-                phraseCount = standardTotal,
-                onDismiss = {
-                    showConfetti = false
-                    onReadyForQuiz()
+            Box(
+                modifier = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.94f)),
+                contentAlignment = Alignment.Center
+            ){
+                ConfettiCanvasOverlay(
+                    onDismiss = {
+                        showConfetti = false
+                        onReadyForQuiz()
+                    }
+                )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = levelName,
+                        style = MaterialTheme.typography.displayLarge,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "$standardTotal phrases mastered",
+                        fontSize = 24.sp,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = Color.White.copy(alpha = 0.7f)
+                    )
                 }
-            )
+            }
         }
     }
 }
@@ -286,48 +301,79 @@ fun LearningTopBar(
             shape = CircleShape,
             border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
         ) {
-            Text(
-                text = "🌱  ${levelName.uppercase()}",
-                style = MaterialTheme.typography.titleLarge.copy(letterSpacing = 2.sp),
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(horizontal = 32.dp, vertical = 18.dp),
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
+            Row(
+                modifier = Modifier.padding(vertical = 15.dp, horizontal = 30.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-        // Progress bar
-        Box(
-            modifier = Modifier
-                .width(500.dp)
-                .height(10.dp)
-                .clip(CircleShape)
-                .background(Color.White.copy(alpha = 0.1f))
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(progress)
-                    .fillMaxHeight()
-                    .clip(CircleShape)
-                    .background(
-                        Brush.horizontalGradient(
-                            listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.secondary
-                            )
-                        )
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.AutoAwesome,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.padding(12.dp)
                     )
-            )
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Column {
+                    Text(
+                        text = "CURRENT STAGE: Learning",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        letterSpacing = 1.5.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = "LEVEL: $levelName",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        letterSpacing = 1.5.sp
+                    )
+                }
+            }
         }
 
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            // Card counter
+        Column(
+            modifier = Modifier,
+            horizontalAlignment = Alignment.End
+        ) {
             Text(
                 text = "Card ${currentIndex + 1} of $total",
-                fontSize = 28.sp,
-                style = MaterialTheme.typography.titleLarge.copy(letterSpacing = 1.sp),
+                fontSize = 24.sp,
+                style = MaterialTheme.typography.bodyLarge.copy(letterSpacing = 1.sp),
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+            Spacer(modifier = Modifier.height(12.dp))
+            Box(
+                modifier = Modifier
+                    .width(500.dp)
+                    .height(10.dp)
+                    .clip(CircleShape)
+                    .background(Color.White.copy(alpha = 0.1f))
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(progress)
+                        .fillMaxHeight()
+                        .clip(CircleShape)
+                        .background(
+                            Brush.horizontalGradient(
+                                listOf(
+                                    MaterialTheme.colorScheme.primary,
+                                    MaterialTheme.colorScheme.secondary
+                                )
+                            )
+                        )
+                )
+            }
         }
     }
 }
@@ -409,7 +455,7 @@ fun CategoryDividerView(card: Flashcard, onSkip: () -> Unit) {
             ) {
                 Text(
                     text = "NEXT TOPIC",
-                    style = MaterialTheme.typography.titleLarge.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
                         letterSpacing = 2.sp,
                         fontWeight = FontWeight.SemiBold
                     ),
@@ -501,7 +547,7 @@ fun CulturalTipView(card: Flashcard, onSkip: () -> Unit) {
                     TextButton(onClick = {
                         if (!hasSkipped) { hasSkipped = true; onSkip() }
                     }) {
-                        Text("Skip", style = MaterialTheme.typography.titleLarge, color = Color.White.copy(alpha = 0.8f))
+                        Text("Skip", style = MaterialTheme.typography.bodyLarge, color = Color.White.copy(alpha = 0.8f))
                     }
                 }
             }
@@ -562,9 +608,9 @@ fun LearningCTAButton(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = if (isRetake) "RETAKE THE QUIZ" else "I'M READY FOR THE QUIZ",
-                style = MaterialTheme.typography.labelLarge.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     fontWeight = FontWeight.ExtraBold,
-                    letterSpacing = 2.sp
+                    letterSpacing = 1.5.sp
                 )
             )
             Spacer(modifier = Modifier.width(16.dp))

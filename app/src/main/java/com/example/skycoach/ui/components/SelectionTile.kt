@@ -61,7 +61,7 @@ fun SelectionTile(
                 Spacer(modifier = Modifier.width(20.dp))
             }
             
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.bodyLarge.copy(
@@ -73,6 +73,7 @@ fun SelectionTile(
                 if (subtitle != null) {
                     Text(
                         text = subtitle,
+                        fontSize = 18.sp,
                         style = MaterialTheme.typography.labelLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

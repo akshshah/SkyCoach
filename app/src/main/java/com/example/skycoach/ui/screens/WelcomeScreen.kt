@@ -42,7 +42,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -52,7 +51,6 @@ import androidx.compose.ui.unit.sp
 import com.example.skycoach.R
 import com.example.skycoach.data.AllDestinations
 import com.example.skycoach.data.DestMadrid
-import com.example.skycoach.ui.components.FlightRouteWidget
 import com.example.skycoach.ui.components.GlassCard
 import com.example.skycoach.ui.components.TimeToDestination
 
@@ -128,9 +126,9 @@ fun WelcomeScreen(
             )
             Text(
                 text = "Boarded a tourist. Landed a local.",
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 1.5.sp,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontWeight = FontWeight.SemiBold,
+                    letterSpacing = 1.sp,
                     color = MaterialTheme.colorScheme.onSurface
                 )
             )
@@ -263,10 +261,10 @@ fun WelcomeScreen(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(
                                         text = "START LEARNING",
-                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                        style = MaterialTheme.typography.bodyLarge.copy(
                                             letterSpacing = 1.sp
                                         ),
-                                        fontWeight = FontWeight.ExtraBold
+                                        fontWeight = FontWeight.Bold
                                     )
                                     Spacer(modifier = Modifier.width(12.dp))
                                     Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
@@ -292,10 +290,10 @@ fun WelcomeScreen(
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
                                         text = "RESUME LAST SESSION",
-                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                        style = MaterialTheme.typography.bodyLarge.copy(
                                             letterSpacing = 1.sp
                                         ),
-                                        fontWeight = FontWeight.ExtraBold
+                                        fontWeight = FontWeight.Bold
                                     )
                                 }
                             }
