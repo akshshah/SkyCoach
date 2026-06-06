@@ -127,7 +127,7 @@ fun OnboardingScreen(
                             repeat(totalSteps) { step ->
                                 Box(
                                     modifier = Modifier
-                                        .height(8.dp)
+                                        .height(6.dp)
                                         .weight(1f)
                                         .clip(CircleShape)
                                         .background(

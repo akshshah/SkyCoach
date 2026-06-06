@@ -114,7 +114,7 @@ val MadridQuiz = listOf(
         type = QuestionType.PRONUNCIATION,
         question = "How do you pronounce 'La cuenta, por favor'?",
         options = listOf("Audio A", "Audio B", "Audio C", "Audio D"),
-        correctAnswer = "Audio A",
+        correctAnswer = "Audio D",
         audioOptions = mapOf(
             "Audio A" to "url_correct_pronunciation",
             "Audio B" to "url_wrong_1",

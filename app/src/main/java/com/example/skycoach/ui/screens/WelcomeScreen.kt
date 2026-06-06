@@ -152,7 +152,7 @@ fun WelcomeScreen(
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         Text(
-                            text = "Welcome,\nMr. Anderson",
+                            text = "Welcome,\nMr. John Doe",
                             style = MaterialTheme.typography.displayLarge,
                             color = MaterialTheme.colorScheme.onBackground
                         )

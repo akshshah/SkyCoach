@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun FlightRouteWidget(
-    from: String = "NYC",
+    from: String = "JFK",
     to: String = "MAD",
     modifier: Modifier = Modifier
 ) {

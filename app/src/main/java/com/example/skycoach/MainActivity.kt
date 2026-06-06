@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.skycoach.ui.navigation.Screen
 import com.example.skycoach.ui.screens.GeneratingScreen
+import com.example.skycoach.ui.screens.LandingKitScreen
 import com.example.skycoach.ui.screens.LearningScreen
 import com.example.skycoach.ui.screens.OnboardingScreen
 import com.example.skycoach.ui.screens.QuizScreen
@@ -72,12 +73,20 @@ fun SkyCoachAppNavigation() {
         }
         composable(Screen.Quiz.route) {
             QuizScreen(
-                onNextLevel = { },
-                onRetry = {navController.navigate(Screen.Quiz.route) }
+                onNextLevel = { navController.navigate(Screen.LandingKit.route) },
+                onRetry = { 
+                    navController.navigate(Screen.Quiz.route) {
+                        popUpTo(Screen.Quiz.route) { inclusive = true }
+                    }
+                }
             )
         }
         composable(Screen.LandingKit.route) {
-            // Screen to be implemented
+            LandingKitScreen {
+                navController.navigate(Screen.Welcome.route) {
+                    popUpTo(Screen.Welcome.route) { inclusive = true }
+                }
+            }
         }
     }
 }
