@@ -53,11 +53,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
@@ -105,6 +101,7 @@ fun LandingKitScreen(
             enter = scaleIn(tween(500, easing = FastOutSlowInEasing), initialScale = 0.92f) + fadeIn(tween(500))
         ) {
             Column(
+                modifier = Modifier.scale(1.15f),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(60.dp)
             ) {
@@ -285,56 +282,38 @@ fun TicketLeftStub(data: LandingKitData) {
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Tagline
-            Text(
-                text = "Boarded a tourist,\nLanded a local",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontStyle = FontStyle.Italic,
-                    lineHeight = 24.sp
-                ),
-                color = Color.White.copy(alpha = 0.6f)
-            )
-        }
+            Box(
+                modifier = Modifier.width(320.dp), // Set a constrained width
+                contentAlignment = Alignment.CenterStart // Aligns everything inside to the left
+            ) {
+                // 1. Tagline (Bottom Layer)
+                Text(
+                    text = "Boarded a tourist,\nLanded a local",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontStyle = FontStyle.Italic,
+                        lineHeight = 24.sp
+                    ),
+                    color = Color.White.copy(alpha = 0.6f),
+                )
 
-        // Decorative flight arc — bottom right of stub
-        Canvas(
-            modifier = Modifier
-                .size(240.dp)
-                .align(Alignment.BottomStart)
-                .offset(x = 0.dp, y = (-20).dp)
-        ) {
-            val path = Path().apply {
-                moveTo(0f, size.height)
-                lineTo(size.width, size.width)
-            }
-            drawPath(
-                path = path,
-                color = Color(0xFFD4AF37).copy(alpha = 0.7f),
-                style = Stroke(width = 2.dp.toPx())
-            )
-            val planeSizePx = 28.dp.toPx()
-            val halfPlane = planeSizePx / 2f
-            withTransform({
-                translate(left = size.width, top = size.height)
-
-                // ROTATION ADJUSTMENT:
-                // Because the curve is now much steeper at the exit point,
-                // a 5-degree angle aligns the nose perfectly with the new trajectory.
-                rotate(degrees = 90f, pivot = Offset.Zero)
-
-                // Center the plane directly on the line's endpoint
-                translate(left = -halfPlane, top = -halfPlane)
-            }) {
-                drawIntoCanvas { _ ->
-                    with(planePainter) {
-                        draw(
-                            size = Size(planeSizePx, planeSizePx),
-                            colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
-                                Color(0xFFD4AF37).copy(alpha = 0.8f)
+                // 2. The Line (Top Layer - Overlapping)
+                Box(
+                    modifier = Modifier
+                        .width(245.dp)
+                        .height(2.dp)
+                        .align(Alignment.CenterStart) // Pins the line to the top of the box
+                        .background(
+                            Brush.horizontalGradient(
+                                listOf(Color(0xFFD4AF37).copy(alpha = 0f), Color(0xFFD4AF37))
                             )
                         )
-                    }
-                }
+                )
+                Icon(
+                    imageVector = Icons.Default.AirplanemodeActive,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(32.dp).align(Alignment.CenterEnd).rotate(90f)
+                )
             }
         }
     }
